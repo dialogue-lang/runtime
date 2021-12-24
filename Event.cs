@@ -1,8 +1,14 @@
 ﻿namespace Dialang
 {
-    public abstract class Event
+    public sealed class Event
     {
-        public int Char { get; }
-        public abstract void Run();
+        public string Name { get; }
+        public int Position { get; }
+
+        public Event(string name, int position)
+        {
+            Name = name;
+            Position = position;
+        }
     }
 }

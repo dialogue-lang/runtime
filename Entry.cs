@@ -1,11 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace Dialang
 {
     public sealed class Entry
     {
-        public string Text { get; }
-        public int Length => Text.Length;
-        public HashSet<string> Events { get; }
+        public string Name { get; }
+        public Script[] Scripts { get; }
+
+        internal Entry(string name, int len)
+        {
+            Name = name;
+            Scripts = new Script[len];
+        }
+
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }
