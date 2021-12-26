@@ -27,17 +27,17 @@ namespace Dialang.IO
         #region .NET Types
 
         public sbyte ReadInt8() => (sbyte)Read();
-        public short ReadInt16() => BitConverter.ToInt16(Read(2));
-        public int ReadInt32() => BitConverter.ToInt32(Read(4));
-        public long ReadInt64() => BitConverter.ToInt64(Read(8));
+        public short ReadInt16() => BitConverter.ToInt16(Read(2), 0);
+        public int ReadInt32() => BitConverter.ToInt32(Read(4), 0);
+        public long ReadInt64() => BitConverter.ToInt64(Read(8), 0);
         public byte ReadUInt8() => Read();
-        public ushort ReadUInt16() => BitConverter.ToUInt16(Read(2));
-        public uint ReadUInt32() => BitConverter.ToUInt32(Read(4));
-        public ulong ReadUInt64() => BitConverter.ToUInt64(Read(8));
-        public float ReadSingle() => BitConverter.ToSingle(Read(4));
-        public double ReadDouble() => BitConverter.ToDouble(Read(8));
-        public bool ReadBool() => BitConverter.ToBoolean(Read(1));
-        public char ReadChar() => BitConverter.ToChar(Read(2));
+        public ushort ReadUInt16() => BitConverter.ToUInt16(Read(2), 0);
+        public uint ReadUInt32() => BitConverter.ToUInt32(Read(4), 0);
+        public ulong ReadUInt64() => BitConverter.ToUInt64(Read(8), 0);
+        public float ReadSingle() => BitConverter.ToSingle(Read(4), 0);
+        public double ReadDouble() => BitConverter.ToDouble(Read(8), 0);
+        public bool ReadBool() => BitConverter.ToBoolean(Read(1), 0);
+        public char ReadChar() => BitConverter.ToChar(Read(2), 0);
         public string ReadString() => Encoding.Unicode.GetString(Read(ReadInt32()));
         public string ReadString(Encoding enc) => enc.GetString(Read(ReadInt32()));
 
