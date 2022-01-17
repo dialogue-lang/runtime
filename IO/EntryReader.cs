@@ -38,7 +38,7 @@ namespace Dialang.IO
         public double ReadDouble() => BitConverter.ToDouble(Read(8), 0);
         public bool ReadBool() => BitConverter.ToBoolean(Read(1), 0);
         public char ReadChar() => BitConverter.ToChar(Read(2), 0);
-        public string ReadString() => Encoding.Unicode.GetString(Read(ReadInt32()));
+        public string ReadString() => Encoding.UTF8.GetString(Read(ReadInt32()));
         public string ReadString(Encoding enc) => enc.GetString(Read(ReadInt32()));
 
         #endregion
@@ -68,9 +68,12 @@ namespace Dialang.IO
             for (int i = 0; i < s.Emotes.Length; i++)
                 s.Emotes[i] = ReadEmote();
 
-            for (int i = 0; i < s.Emotes.Length; i++)
-                s.Emotes[i] = ReadEmote();
+            for (int i = 0; i < s.Formats.Length; i++)
+                s.Formats[i] = ReadFormat();
 
+            for (int i = 0; i < s.Pauses.Length; i++)
+                s.Pauses[i] = ReadPause();
+            
             return s;
         }
 

@@ -5,6 +5,7 @@ using Dialang.IO;
 
 namespace Dialang
 {
+    public delegate void LoggingHandle(string msg);
     public sealed class Project
     {
         public string Name { get; }
@@ -17,14 +18,14 @@ namespace Dialang
             {
                 using (EntryReader r = new EntryReader(mem))
                 {
-
                     Project p = new Project(r.ReadString(), r.ReadInt32());
                     Entry e;
 
                     for (int i = 0; i < p.Length; i++)
                     {
                         e = r.ReadEntry();
-                        p.Entries.Add(e.GetHashCode(), e);
+                        if (e.Name.Length > 0 && e.Scripts.Length > 0)
+                            p.Entries.Add(e.Name, e);
                     }
 
                     return p;
@@ -36,14 +37,14 @@ namespace Dialang
         {
             using (EntryReader r = new EntryReader(stream))
             {
-
                 Project p = new Project(r.ReadString(), r.ReadInt32());
                 Entry e;
 
                 for (int i = 0; i < p.Length; i++)
                 {
                     e = r.ReadEntry();
-                    p.Entries.Add(e.GetHashCode(), e);
+                    if (e.Name.Length > 0 && e.Scripts.Length > 0)
+                        p.Entries.Add(e.Name, e);
                 }
 
                 if (dispose)

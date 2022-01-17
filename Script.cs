@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+
+using Dialang.IO;
 
 namespace Dialang
 {
@@ -12,7 +15,7 @@ namespace Dialang
 
         internal Script(string text, int lEv, int lEm, int lFo, int lPa)
         {
-            Text = "Cool test entry text over here!";
+            Text = text;
             Events = new Event[lEv];
             Emotes = new Emote[lEm];
             Formats = new Format[lFo];
