@@ -4,7 +4,7 @@
     <TargetFrameworks>net6.0;netstandard2.1</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <AssemblyName>dialang_runtime</AssemblyName>
+    <AssemblyName>Dialang.Runtime</AssemblyName>
     <RootNamespace>Dialang</RootNamespace>
   </PropertyGroup>
 

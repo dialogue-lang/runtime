@@ -12,14 +12,16 @@ namespace Dialang
         public Emote[] Emotes { get; }
         public Format[] Formats { get; }
         public Pause[] Pauses { get; }
+        public Choice[] Choices { get; }
 
-        internal Script(string text, int lEv, int lEm, int lFo, int lPa)
+        internal Script(string text, int lEv, int lEm, int lFo, int lPa, int lCh)
         {
             Text = text;
             Events = new Event[lEv];
             Emotes = new Emote[lEm];
             Formats = new Format[lFo];
             Pauses = new Pause[lPa];
+            Choices = new Choice[lCh];
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Dialang.IO
         public Script ReadScript()
         {
             // Events, Emotes, Formats, Pauses
-            Script s = new Script(ReadString(), ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
+            Script s = new Script(ReadString(), ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
            
             for (int i = 0; i < s.Events.Length; i++)
                 s.Events[i] = ReadEvent();
@@ -73,7 +73,10 @@ namespace Dialang.IO
 
             for (int i = 0; i < s.Pauses.Length; i++)
                 s.Pauses[i] = ReadPause();
-            
+
+            for (int i = 0; i < s.Choices.Length; i++)
+                s.Choices[i] = ReadChoice();
+
             return s;
         }
 
@@ -95,6 +98,11 @@ namespace Dialang.IO
         public Pause ReadPause()
         {
             return new Pause(ReadInt32(), ReadInt32());
+        }
+
+        public Choice ReadChoice()
+        {
+            return new Choice(ReadInt32(), ReadString());
         }
 
         #endregion
