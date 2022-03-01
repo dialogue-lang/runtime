@@ -38,7 +38,10 @@ namespace Dialang.IO
         public double ReadDouble() => BitConverter.ToDouble(Read(8), 0);
         public bool ReadBool() => BitConverter.ToBoolean(Read(1), 0);
         public char ReadChar() => BitConverter.ToChar(Read(2), 0);
-        public string ReadString() => Encoding.UTF8.GetString(Read(ReadInt32()));
+
+        // MAKE SURE THIS IS UNICODE BY DEFAULT
+        // Accented characters (ex. é, í, ñ) don't exist in UTF-8.
+        public string ReadString() => Encoding.Unicode.GetString(Read(ReadInt32()));
         public string ReadString(Encoding enc) => enc.GetString(Read(ReadInt32()));
 
         #endregion
@@ -59,8 +62,8 @@ namespace Dialang.IO
 
         public Script ReadScript()
         {
-            // Events, Emotes, Formats, Pauses
-            Script s = new Script(ReadString(), ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
+            //                                  Events,      Emotes,      Formats,     Pauses,      Choices,     Combines,    (Formats)
+            Script s = new Script(ReadString(), ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
            
             for (int i = 0; i < s.Events.Length; i++)
                 s.Events[i] = ReadEvent();
@@ -76,6 +79,9 @@ namespace Dialang.IO
 
             for (int i = 0; i < s.Choices.Length; i++)
                 s.Choices[i] = ReadChoice();
+
+            for (int i = 0; i < s.Combines.Length; i++)
+                s.Combines[i] = ReadCombine();
 
             return s;
         }
@@ -103,6 +109,11 @@ namespace Dialang.IO
         public Choice ReadChoice()
         {
             return new Choice(ReadInt32(), ReadString());
+        }
+
+        public Combine ReadCombine()
+        {
+            return new Combine(ReadInt32(), ReadInt32());
         }
 
         #endregion
