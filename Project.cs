@@ -39,7 +39,7 @@ namespace Dialang
             {
                 Project p = new Project(r.ReadString(), r.ReadInt32());
                 Entry e;
-
+                
                 for (int i = 0; i < p.Length; i++)
                 {
                     e = r.ReadEntry();

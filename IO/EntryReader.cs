@@ -41,8 +41,8 @@ namespace Dialang.IO
 
         // MAKE SURE THIS IS UNICODE BY DEFAULT
         // Accented characters (ex. é, í, ñ) don't exist in UTF-8.
-        public string ReadString() => Encoding.Unicode.GetString(Read(ReadInt32()));
-        public string ReadString(Encoding enc) => enc.GetString(Read(ReadInt32()));
+        public string ReadString() => Encoding.Unicode.GetString(Read(ReadInt32() * Encoding.Unicode.GetByteCount(" ")));
+        public string ReadString(Encoding enc) => enc.GetString(Read(ReadInt32() * enc.GetByteCount(" ")));
 
         #endregion
 
