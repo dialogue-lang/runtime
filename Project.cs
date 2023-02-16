@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using System.IO;
 
 using Dialang.IO;
@@ -10,11 +10,11 @@ namespace Dialang
     {
         public string Name { get; }
         public int Length { get; }
-        public Hashtable Entries { get; }
+        public Dictionary<string, Entry> Entries { get; }
 
-        public static Project Parse(byte[] buffer)
+        public static Project Parse(byte[] byteCode)
         {
-            using (MemoryStream mem = new MemoryStream(buffer))
+            using (MemoryStream mem = new MemoryStream(byteCode))
             {
                 using (EntryReader r = new EntryReader(mem))
                 {
@@ -58,7 +58,7 @@ namespace Dialang
         {
             if (!Entries.ContainsKey(id))
                 throw new System.ArgumentOutOfRangeException($"The provided id '{id}' does not exist in the entry table.");
-            return (Entry)Entries[id];
+            return Entries[id];
         }
 
         public bool TryGet(string id, out Entry entry)
@@ -69,7 +69,7 @@ namespace Dialang
                 return false;
             }
 
-            entry = (Entry)Entries[id];
+            entry = Entries[id];
             return true;
         }
 
@@ -77,7 +77,7 @@ namespace Dialang
         {
             Name = name;
             Length = amount;
-            Entries = new Hashtable(amount);
+            Entries = new Dictionary<string, Entry>(amount);
         }
     }
 }

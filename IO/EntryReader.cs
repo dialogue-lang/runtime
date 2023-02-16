@@ -40,7 +40,6 @@ namespace Dialang.IO
         public char ReadChar() => BitConverter.ToChar(Read(2), 0);
 
         // MAKE SURE THIS IS UNICODE BY DEFAULT
-        // Accented characters (ex. é, í, ñ) don't exist in UTF-8.
         public string ReadString() => Encoding.Unicode.GetString(Read(ReadInt32() * Encoding.Unicode.GetByteCount(" ")));
         public string ReadString(Encoding enc) => enc.GetString(Read(ReadInt32() * enc.GetByteCount(" ")));
 
@@ -53,9 +52,7 @@ namespace Dialang.IO
             Entry e = new Entry(ReadString(), ReadInt32());
             
             for (int i = 0; i < e.Scripts.Length; i++)
-            {
                 e.Scripts[i] = ReadScript();
-            }
 
             return e;
         }
@@ -87,34 +84,22 @@ namespace Dialang.IO
         }
 
         public Event ReadEvent()
-        {
-            return new Event(ReadString(), ReadInt32());
-        }
+            => new Event(ReadString(), ReadInt32());
 
         public Emote ReadEmote()
-        {
-            return new Emote(ReadString(), ReadInt32());
-        }
+            => new Emote(ReadString(), ReadInt32());
 
         public Format ReadFormat()
-        {
-            return new Format(ReadString(), ReadInt32(), ReadInt32());
-        }
+            => new Format(ReadString(), ReadInt32(), ReadInt32());
 
         public Pause ReadPause()
-        {
-            return new Pause(ReadInt32(), ReadInt32());
-        }
+            => new Pause(ReadInt32(), ReadInt32());
 
         public Choice ReadChoice()
-        {
-            return new Choice(ReadInt32(), ReadString());
-        }
+            => new Choice(ReadInt32(), ReadString());
 
         public Combine ReadCombine()
-        {
-            return new Combine(ReadInt32(), ReadInt32());
-        }
+            => new Combine(ReadInt32(), ReadInt32());
 
         #endregion
 
